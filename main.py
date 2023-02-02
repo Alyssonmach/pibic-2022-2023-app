@@ -26,6 +26,63 @@ st.markdown(body = '**Objetivo da Pesquisa**: O objetivo desse projeto é o dese
                    'diversidade e fidelidade com o grau de detalhamento presente nas imagens originais '
                    'das bases de dados testadas.')
 
+with st.expander(label = 'Clique aqui para saber mais sobre os membros do projeto'):
+        st.markdown(body = '***')
+
+        col1, col2 = st.columns(spec = [1,8])
+
+        with col1:
+            st.image(image = 'https://user-images.githubusercontent.com/58775072/145095066-08ec2fd0-0e30-44b4-998d-c3e78d4409e0.jpg', 
+                     width = 120)
+        with col2:
+            st.markdown(body = '**Nome**: [Luciana Ribeiro Veloso](http://lattes.cnpq.br/2498050002491677)')
+            st.markdown(body = '**Formação Acadêmica**: Doutora em Engenharia Elétrica (UFCG)')
+            st.markdown(body = '**Biografia**: Possui graduação em Engenharia Elétrica pela Universidade Federal da '
+                               'Paraíba (1995), mestrado em Engenharia Elétrica pela Universidade Federal da Paraíba '
+                               '(1998) e Doutorado em Engenharia Elétrica pela Universidade Federal de Campina Grande '
+                               '(2009). Atualmente é professora da Universidade Federal de Campina Grande. Tem '
+                               'experiência na área de Engenharia Elétrica, com ênfase em Processamento de Imagens, ' 
+                               'atuando principalmente nos seguintes temas: Reconhecimento de Palavras Manuscritas, '
+                               'Processamento de Imagens e Reconhecimento de Padrões.')
+
+        st.markdown(body = '***')
+        
+        col1, col2 = st.columns(spec = [1,8])
+        
+        with col1:
+            st.image(image = 'https://user-images.githubusercontent.com/58775072/145095291-61c00da5-211a-4b86-9728-77594fbf60e9.gif', 
+                     width = 120)
+        with col2:
+            st.markdown(body = '**Nome**: [Leo de Lima Araújo](http://lattes.cnpq.br/2093156188518982)')
+            st.markdown(body = '**Formação Acadêmica**: Mestrando em Engenharia Elétrica (UFCG)')
+            st.markdown(body = '**Biografia**: Pós-graduando em Engenharia Elétrica pela Universidade Federal de Campina '
+                               'Grande. Trabalha sobretudo com Aprendizado Profundo (*Deep Learning*) e Visão Computacional '
+                               'e atua no desenvolvimento pesquisas na área de saúde, envolvendo o diagnóstico automatizado '
+                               'de Distúrbios Pulmonares e *COVID-19*, além de aplicações industriais, identificando defeitos '
+                               'em televisores/monitores na linha de produção.')
+        
+        st.markdown(body = '***')
+        
+        col1, col2 = st.columns(spec = [1,8])
+        
+        with col1:
+            st.image(image = 'https://user-images.githubusercontent.com/58775072/145095535-fb303146-1c30-40bf-85d2-6b90e4a68ab3.png', 
+                     width = 120)
+        with col2:
+            st.markdown(body = '**Nome**: [Alysson Machado de Oliveira Barbosa](http://lattes.cnpq.br/0536933202710340)')
+            st.markdown(body = '**Formação Acadêmica**: Graduando em Engenharia Elétrica (UFCG)')
+            st.markdown(body = '**Biografia**: Possui segundo grau completo na instituição Colégio Alfredo Dantas (CAD) '
+                               'e atualmente faz graduação em Engenharia Elétrica pela Universidade Federal de Campina '
+                               'Grande (UFCG). Desenvolveu um projeto intitulado "Álgebra Linear com Python" , visando aplicar '
+                               'computacionalmente conceitos de Álgebra Linear. Atualmente é ativo no desenvolvimento '
+                               'de trabalhos em Inteligência Artificial (IA) com conhecimentos em *Machine Learning* ' 
+                               'e *Deep Learning*. Tem experiência no desenvolvimento de páginas web, programação em C, '
+                               'C++, Python e versionamento de projetos com Git. Desenvolveu atividades relevantes '
+                               'para a comunidade acadêmica como o evento *Academic Talk* em parceria com o capítulo '
+                               'PELS/IAS da UFCG associado ao Instituto de Engenheiros Elétricos e Eletrônicos (IEEE).')
+
+        st.markdown(body = '***')
+
 data_box = st.selectbox(label = 'Selecione a Base de Dados:', options = ['MNIST', 'CELEBA (Indisponível)', 
                         'CIFAR - 10 (Indisponível)', 'FASHION - MNIST (Indisponível)'], index = 0, 
                         help = 'Selecione a base de dados para testar a capacidade dos algoritmos '
