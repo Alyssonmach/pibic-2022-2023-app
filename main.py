@@ -82,18 +82,16 @@ with st.expander(label = 'Clique aqui para saber mais sobre os membros do projet
                                'PELS/IAS da UFCG associado ao Instituto de Engenheiros Elétricos e Eletrônicos (IEEE).')
 
         st.markdown(body = '***')
-
-data_box = st.selectbox(label = 'Selecione a Base de Dados:', options = ['MNIST', 'CELEBA (Indisponível)', 
-                        'CIFAR - 10 (Indisponível)', 'FASHION - MNIST (Indisponível)'], index = 0, 
+datasets = ['MNIST', 'Fashion MNIST', 'EMNIST Letters (Beta)', 'CIFAR10 (Beta)', 'CELEBA (INDISPONÍVEL)']
+data_box = st.selectbox(label = 'Selecione a Base de Dados:', options = datasets, index = 0, 
                         help = 'Selecione a base de dados para testar a capacidade dos algoritmos '
                         'generativos disponíveis para teste.')
+algorithms = ['Simple GAN (Indisponível)', 'DCGAN', 'SNGAN (Indisponível)', 'WGAN - GP (Indisponível)',
+              'SNGAN + WGAN - GP (Indisponível)', 'Variational Autoencoder (Indisponível)']
 algorithm_box = st.selectbox(label = 'Selecione o Sistema Generativo:', 
-                             options = ['Simple GAN (Indisponível)', 'DCGAN', 'SNGAN (Indisponível)', 
-                             'WGAN - GP (Indisponível)', 'SNGAN + WGAN - GP (Indisponível)'], index = 1, 
+                             options = algorithms, index = 1, 
                              help = 'Selecione o sistema generativo para visualizar as imagens '
                              'artificiais geradas de acordo com a base de dados selecionada.')
-
-st.markdown(body = f'{data_box} e {algorithm_box}')
 
 st.markdown(body = f'### Base de Dados: {data_box} | Sistema Generativo: {algorithm_box}')
 st.markdown(body = '***')
@@ -107,7 +105,7 @@ if data_box == 'MNIST' and algorithm_box == 'DCGAN':
 
     generator_input_dim, discriminator_im_chan = utils.get_input_dimensions(z_dim, mnist_shape, n_classes)
     gen = utils.Generator(input_dim = generator_input_dim).to(device)
-    gen.load_state_dict(torch.load('models/gen_conditional_dcgan.pth', 
+    gen.load_state_dict(torch.load('models/gen_conditional_dcgan_mnist.pth', 
                         map_location = torch.device(device)))
     gen.eval()
 
@@ -179,11 +177,290 @@ if data_box == 'MNIST' and algorithm_box == 'DCGAN':
     
     st.markdown(body = '#### Detalhes sobre o Sistema Generativo:')
     st.markdown(body = get_descriptions.dcgan_description())
-    st.image(image = 'data/dcgan-gen.png', caption = 'Desenho arquitetural do gerador da DCGAN '
-             'Radford et al (2016). Disponível em: https://arxiv.org/pdf/1511.06434v1.pdf.')
+    st.markdown(body = get_descriptions.dcgan_citation())
     st.markdown(body = '***')
     st.markdown(body = '#### Detalhes sobre a Base de Dados:')
     st.markdown(body = get_descriptions.mnist_description())
+    st.markdown(body = get_descriptions.mnist_citation())
+
+elif data_box == 'Fashion MNIST' and algorithm_box == 'DCGAN':
+
+    z_dim = 64
+    fashion_mnist_shape = (1, 28, 28)
+    n_classes = 10
+    device = 'cpu'
+    labels_decoding = ['Camisetas/Tops', 'Calças' ,'Suéteres', 'Vestidos', 'Casacos', 'Sandálias', 
+                       'Camisas', 'Tênis', 'Bolsas', 'Botas']
+
+    generator_input_dim, discriminator_im_chan = utils.get_input_dimensions(z_dim, fashion_mnist_shape, n_classes)
+    gen = utils.Generator(input_dim = generator_input_dim).to(device)
+    gen.load_state_dict(torch.load('models/gen_conditional_dcgan_fashion_mnist.pth', 
+                        map_location = torch.device(device)))
+    gen.eval()
+
+    col1, col2, col3 = st.columns(spec = [5, 1, 1])
+
+    with col1:
+        start_plot_number = st.slider(label = 'Selecione a primeira vestimenta para interpolação:', 
+                                      min_value = 0, max_value = 9, value = 1)
+        st.markdown(body = f'* *Vestimenta Selecionada*: **{labels_decoding[start_plot_number]}**')
+        end_plot_number = st.slider(label = 'Selecione a segunda vestimenta para interpolação:',
+                                    min_value = 0, max_value = 9, value = 9)
+        st.markdown(body = f'* *Vestimenta Selecionada*: **{labels_decoding[end_plot_number]}**')
+        n_interpolation = st.slider(label = 'Selecione a quantidade de imagens geradas na interpolação:',
+                                    min_value = 10, max_value = 200, value = 100)
+    
+    with col2:
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+    
+    with col3:
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+
+        st.image(image = 'images/tensor_images.gif', width = 150)
+
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+    
+    st.markdown(body = '***')
+
+    col1, col2, col3 = st.columns(spec = [2, 1, 1])
+
+    with col1:
+        n_interpolation = st.slider(label = 'Dígite a quantidade de imagens geradas na interpolação:', 
+                                    min_value = 6, max_value = 30, value = 9, step = 3)
+        n_noise = st.slider(label = 'Selecione a vestimenta a ser gerada:', min_value = 0, max_value = 9,
+                            value = 9)
+        st.markdown(body = f'* *Vestimenta Selecionada*: **{labels_decoding[n_noise]}**')
+        interpolation_label = utils.get_one_hot_labels(torch.Tensor([n_noise]).long(), 
+                                                       n_classes).repeat(n_interpolation, 1).float()
+
+    with col2:
+        utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
+                                    interpolation_label = interpolation_label, gen = gen, device = device)
+        st.image(image = 'images/interpolate-noise.gif', width = 300) 
+
+    with col3:
+        utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
+                                    interpolation_label = interpolation_label, gen = gen, device = device)
+        st.image(image = 'images/interpolate-noise.gif', width = 300) 
+    
+    st.markdown(body = '#### Detalhes sobre o Sistema Generativo:')
+    st.markdown(body = get_descriptions.dcgan_description())
+    st.markdown(body = get_descriptions.dcgan_citation())
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre a Base de Dados:')
+    st.markdown(body = get_descriptions.fashion_mnist_description())
+    st.markdown(body = get_descriptions.fashion_mnist_citation())
+
+elif data_box == 'EMNIST Letters (Beta)' and algorithm_box == 'DCGAN':
+
+    z_dim = 64
+    mnist_letters_shape = (1, 28, 28)
+    n_classes = 27
+    device = 'cpu'
+    labels_decoding = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+                       'V', 'W', 'X', 'Y', 'Z']
+
+    generator_input_dim, discriminator_im_chan = utils.get_input_dimensions(z_dim, mnist_letters_shape, n_classes)
+    gen = utils.Generator(input_dim = generator_input_dim).to(device)
+    gen.load_state_dict(torch.load('models/gen_conditional_dcgan_emnist_letters.pth', 
+                        map_location = torch.device(device)))
+    gen.eval()
+
+    col1, col2, col3 = st.columns(spec = [5, 1, 1])
+
+    with col1:
+        start_plot_number = st.slider(label = 'Selecione a primeira letra para interpolação:', 
+                                      min_value = 1, max_value = 26, value = 15)
+        st.markdown(body = f'* *Letra Selecionada*: **{labels_decoding[start_plot_number - 1]}**')
+        end_plot_number = st.slider(label = 'Selecione a segunda letra para interpolação:',
+                                    min_value = 1, max_value = 26, value = 11)
+        st.markdown(body = f'* *Letra Selecionada*: **{labels_decoding[end_plot_number - 1]}**')
+        n_interpolation = st.slider(label = 'Selecione a quantidade de imagens geradas na interpolação:',
+                                    min_value = 10, max_value = 200, value = 100)
+    
+    with col2:
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+    
+    with col3:
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+
+        st.image(image = 'images/tensor_images.gif', width = 150)
+
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+    
+    st.markdown(body = '***')
+
+    col1, col2, col3 = st.columns(spec = [2, 1, 1])
+
+    with col1:
+        n_interpolation = st.slider(label = 'Dígite a quantidade de imagens geradas na interpolação:', 
+                                    min_value = 6, max_value = 30, value = 9, step = 3)
+        n_noise = st.slider(label = 'Selecione a letra a ser gerada:', min_value = 1, max_value = 26,
+                            value = 11)
+        st.markdown(body = f'* *Letra Selecionada*: **{labels_decoding[n_noise - 1]}**')
+        interpolation_label = utils.get_one_hot_labels(torch.Tensor([n_noise]).long(), 
+                                                       n_classes).repeat(n_interpolation, 1).float()
+
+    with col2:
+        utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
+                                    interpolation_label = interpolation_label, gen = gen, device = device)
+        st.image(image = 'images/interpolate-noise.gif', width = 300) 
+
+    with col3:
+        utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
+                                    interpolation_label = interpolation_label, gen = gen, device = device)
+        st.image(image = 'images/interpolate-noise.gif', width = 300) 
+    
+    st.markdown(body = '#### Detalhes sobre o Sistema Generativo:')
+    st.markdown(body = get_descriptions.dcgan_description())
+    st.markdown(body = get_descriptions.dcgan_citation())
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre a Base de Dados:')
+    st.markdown(body = get_descriptions.emnist_letters_description())
+    st.markdown(body = get_descriptions.emnist_letters_citation())
+
+elif data_box == 'CIFAR10 (Beta)' and algorithm_box == 'DCGAN':
+
+    z_dim = 64
+    cifar10_shape = (1, 28, 28)
+    n_classes = 10
+    device = 'cpu'
+    labels_decoding = ['Avião', 'Automóvel', 'Pássaro', 'Gato', 'Cervo', 'Cachorro', 'Sapo', 'Cavalo',
+                       'Navio', 'Caminhão']
+
+    generator_input_dim, discriminator_im_chan = utils.get_input_dimensions(z_dim, cifar10_shape, n_classes)
+    gen = utils.Generator(input_dim = generator_input_dim).to(device)
+    gen.load_state_dict(torch.load('models/gen_conditional_dcgan_cifar10.pth', 
+                        map_location = torch.device(device)))
+    gen.eval()
+
+    col1, col2, col3 = st.columns(spec = [5, 1, 1])
+
+    with col1:
+        start_plot_number = st.slider(label = 'Selecione o primeiro objeto para interpolação:', 
+                                      min_value = 0, max_value = 9, value = 8)
+        st.markdown(body = f'* *Objeto Selecionado*: **{labels_decoding[start_plot_number]}**')
+        end_plot_number = st.slider(label = 'Selecione o segundo objeto para interpolação:',
+                                    min_value = 0, max_value = 9, value = 7)
+        st.markdown(body = f'* *Objeto Selecionado*: **{labels_decoding[end_plot_number]}**')
+        n_interpolation = st.slider(label = 'Selecione a quantidade de imagens geradas na interpolação:',
+                                    min_value = 10, max_value = 200, value = 100)
+    
+    with col2:
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+    
+    with col3:
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+
+        st.image(image = 'images/tensor_images.gif', width = 150)
+
+        images = utils.interpolate_class(first_number = start_plot_number, 
+                                         second_number = end_plot_number, z_dim = z_dim, 
+                                         n_classes = n_classes, device = device, gen = gen, 
+                                         n_interpolation = n_interpolation, show_tensor = False)
+        utils.create_gif(images_pytorch_tensor = images)
+        
+        st.image(image = 'images/tensor_images.gif', width = 150)
+    
+    st.markdown(body = '***')
+
+    col1, col2, col3 = st.columns(spec = [2, 1, 1])
+
+    with col1:
+        n_interpolation = st.slider(label = 'Dígite a quantidade de imagens geradas na interpolação:', 
+                                    min_value = 6, max_value = 30, value = 9, step = 3)
+        n_noise = st.slider(label = 'Selecioneo objeto a ser gerado:', min_value = 0, max_value = 9,
+                            value = 8)
+        st.markdown(body = f'* *Objeto Selecionado*: **{labels_decoding[n_noise]}**')
+        interpolation_label = utils.get_one_hot_labels(torch.Tensor([n_noise]).long(), 
+                                                       n_classes).repeat(n_interpolation, 1).float()
+
+    with col2:
+        utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
+                                    interpolation_label = interpolation_label, gen = gen, device = device)
+        st.image(image = 'images/interpolate-noise.gif', width = 300) 
+
+    with col3:
+        utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
+                                    interpolation_label = interpolation_label, gen = gen, device = device)
+        st.image(image = 'images/interpolate-noise.gif', width = 300) 
+    
+    st.markdown(body = '#### Detalhes sobre o Sistema Generativo:')
+    st.markdown(body = get_descriptions.dcgan_description())
+    st.markdown(body = get_descriptions.dcgan_citation())
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre a Base de Dados:')
+    st.markdown(body = get_descriptions.cifar10_description())
+    st.markdown(body = get_descriptions.cifar10_citation())
+
 else:
     st.warning(body = 'Desculpe, mas essa combinação de base de dados e sistema generativo está indisponível '
-               'no momento.')
+                      'no momento.')
+    
+
