@@ -82,7 +82,7 @@ with st.expander(label = 'Clique aqui para saber mais sobre os membros do projet
                                'PELS/IAS da UFCG associado ao Instituto de Engenheiros Elétricos e Eletrônicos (IEEE).')
 
         st.markdown(body = '***')
-datasets = ['MNIST', 'Fashion MNIST', 'EMNIST Letters (Beta)', 'CIFAR10 (Beta)', 'CELEBA (INDISPONÍVEL)']
+datasets = ['MNIST', 'Fashion MNIST', 'EMNIST Letters', 'CIFAR10 (Beta)', 'CELEBA (INDISPONÍVEL)']
 data_box = st.selectbox(label = 'Selecione a Base de Dados:', options = datasets, index = 0, 
                         help = 'Selecione a base de dados para testar a capacidade dos algoritmos '
                         'generativos disponíveis para teste.')
@@ -275,7 +275,7 @@ elif data_box == 'Fashion MNIST' and algorithm_box == 'DCGAN':
     st.markdown(body = get_descriptions.fashion_mnist_description())
     st.markdown(body = get_descriptions.fashion_mnist_citation())
 
-elif data_box == 'EMNIST Letters (Beta)' and algorithm_box == 'DCGAN':
+elif data_box == 'EMNIST Letters' and algorithm_box == 'DCGAN':
 
     z_dim = 64
     mnist_letters_shape = (1, 28, 28)
