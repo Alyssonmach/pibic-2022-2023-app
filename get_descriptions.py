@@ -1,4 +1,7 @@
 def dcgan_description():
+    '''
+    Get DCGAN architecture description.
+    '''
     
     description = 'A arquitetura **DCGAN (Deep Convolutional Generative Adversarial Network)** é uma '\
                   'técnica de aprendizado de máquina profunda para gerar imagens. Ela consiste em dois '\
@@ -13,6 +16,9 @@ def dcgan_description():
     return description
 
 def dcgan_citation():
+    '''
+    Get DCGAN architecture citation in APA format.
+    '''
 
     citation = '* Radford, A., Metz, L., & Chintala, S.. (2015). Unsupervised Representation Learning '\
                'with Deep Convolutional Generative Adversarial Networks.'
@@ -20,6 +26,9 @@ def dcgan_citation():
     return citation
 
 def mnist_description():
+    '''
+    Get MNIST dataset description.
+    '''
 
     description = '**MNIST** é uma base de dados de dígitos manuscritos amplamente utilizada em aprendizado '\
                   'de máquina e visão computacional. A base de dados contém 60.000 imagens de treinamento '\
@@ -33,6 +42,9 @@ def mnist_description():
     return description
 
 def mnist_citation():
+    '''
+    Get MNIST dataset citation in APA format.
+    '''
 
     citation = '* Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. (1998). Gradient-based learning applied '\
                'to document recognition. Proceedings of the IEEE, 86(11), 2278-2324. doi: 10.1109/5.726791.'
@@ -40,6 +52,9 @@ def mnist_citation():
     return citation
 
 def fashion_mnist_description():
+    '''
+    Get Fashion MNIST dataset description.
+    '''
 
     description = '**Fashion-MNIST** é uma base de dados de imagens que contém 70.000 imagens em escala de cinza '\
                   'de 28x28 pixels de roupas e acessórios. Essa base de dados foi criada como uma alternativa '\
@@ -55,6 +70,9 @@ def fashion_mnist_description():
     return description
 
 def fashion_mnist_citation():
+    '''
+    Get Fashion MNIST dataset citation in APA format.
+    '''
 
     citation = '* Han Xiao, Kashif Rasul, Roland Vollgraf. (2017). Fashion-MNIST: a Novel Image Dataset for '\
                'Benchmarking Machine Learning Algorithms. arXiv preprint arXiv:1708.07747.'
@@ -63,6 +81,9 @@ def fashion_mnist_citation():
     return citation
 
 def emnist_letters_description():
+    '''
+    Get EMNIST Letters dataset description.
+    '''
 
     description = '**EMNIST** é uma base de dados de imagens de dígitos e caracteres alfanuméricos manuscritos '\
                   'em inglês, que contém mais de 800.000 imagens em escala de cinza de 28x28 pixels. Ela foi '\
@@ -79,31 +100,36 @@ def emnist_letters_description():
     return description
 
 def emnist_letters_citation():
+    '''
+    Get EMNIST Letters dataset citation in APA format.
+    '''
 
     citation = '* Cohen, G., Afshar, S., Tapson, J., & van Schaik, A. (2017). EMNIST: an extension of MNIST to handwritten '\
                'letters. arXiv preprint arXiv:1702.05373.'
 
     return citation
 
-def cifar10_description():
+def celeba_description():
+    '''
+    Get CelebA dataset description.
+    '''
 
-    description = '**CIFAR-10** é uma base de dados de imagens criada para fins de reconhecimento de objetos. Ela contém 60.000 '\
-                  'imagens coloridas de 32x32 pixels, divididas em 10 classes, com 6.000 imagens por classe. As 10 classes '\
-                  'incluem avião, automóvel, pássaro, gato, cervo, cachorro, sapo, cavalo, navio e caminhão. A base de dados '\
-                  'é frequentemente utilizada como uma tarefa de classificação de imagem de referência para algoritmos de '\
-                  'aprendizado de máquina e visão computacional. Por causa de sua pequena resolução, a CIFAR-10 é '\
-                  'frequentemente considerada uma tarefa mais fácil do que outras bases de dados de reconhecimento de '\
-                  'objetos, como a ImageNet, mas ainda desafiadora o suficiente para permitir que os pesquisadores '\
-                  'desenvolvam e avaliem algoritmos de reconhecimento de objetos mais avançados. A CIFAR-10 é '\
-                  'amplamente utilizada na comunidade de aprendizado de máquina e visão computacional, e tem '\
-                  'sido um ponto de referência para muitos estudos e pesquisas.'
+    description = '**CelebA** é um conjunto de mais de 200.000 imagens de rostos de celebridades, com anotações que '\
+                  'incluem a posição das feições faciais, a presença de óculos e outras características. A base de dados'\
+                  ' é amplamente utilizada para treinar e avaliar algoritmos de reconhecimento facial, classificação de '\
+                  'gênero e análise de expressões faciais. Além disso, a CelebA é uma das bases de dados mais populares '\
+                  'para a geração de imagens de faces por meio de técnicas de aprendizado profundo, sendo utilizada em '\
+                  'diversos estudos de redes neurais generativas.'
     
     return description
 
-def cifar10_citation():
-     
-     citation = '* Krizhevsky, A., & Hinton, G. (2009). Learning multiple layers of features from tiny images. '\
-                'Technical report.'
+def celeba_citation():
+    '''
+    Get CelebA dataset citation in APA format.
+    '''
 
-     return citation 
+    citation = '* Liu, Z., Luo, P., Wang, X., & Tang, X. (2015). Deep learning face attributes in the wild. '\
+               'In Proceedings of the IEEE International Conference on Computer Vision (pp. 3730-3738).'
+    
+    return citation 
     

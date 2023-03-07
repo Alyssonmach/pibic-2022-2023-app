@@ -134,7 +134,7 @@ def select_model_and_data():
     with col2:
 
         datasets_simple_gan = ['MNIST', 'Fashion MNIST', 'EMNIST Letters']
-        datasets = ['MNIST', 'Fashion MNIST', 'EMNIST Letters', 'CIFAR10 (Indisponível)', 'CELEBA (Indisponível)']
+        datasets = ['MNIST', 'Fashion MNIST', 'EMNIST Letters', 'CelebA']
 
         if algorithm_box == 'Simple GAN (Indisponível)':
             data_box = st.selectbox(label = '**Selecione o Conjunto de Imagens**:', options = datasets_simple_gan, index = 0, 
