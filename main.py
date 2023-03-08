@@ -202,6 +202,87 @@ elif data_box == 'CelebA' and algorithm_box == 'DCGAN':
     st.markdown(body = get_descriptions.celeba_description())
     st.markdown(body = get_descriptions.celeba_citation())
 
+elif data_box == 'MNIST' and algorithm_box == 'Simple GAN':
+
+    z_dim, mnist_shape, n_classes = 64, (1, 28, 28), 10
+
+    gen = generators.GeneratorSimpleGAN(z_dim).to(device)
+    gen.load_state_dict(torch.load('models/generators/gen_conditional_simple_gan_mnist.pth', 
+                        map_location = torch.device(device)))
+    gen.eval()
+
+    n_interpolation = st.slider(label = 'Dígite a quantidade de imagens geradas na interpolação:', 
+                                min_value = 6, max_value = 30, value = 9, step = 3)
+        
+    col1, col2 = st.columns(spec = [5, 5])
+
+    site_structure.simple_gan_images_generated(n_interpolation = n_interpolation, z_dim = z_dim, gen = gen, 
+                                               shape = mnist_shape, device = device, 
+                                               column1 = col1, column2 = col2)
+    
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre o sistema generativo:')
+    st.markdown(body = get_descriptions.simple_gan_description())
+    st.markdown(body = get_descriptions.simple_gan_citation())
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre a base de dados:')
+    st.markdown(body = get_descriptions.mnist_description())
+    st.markdown(body = get_descriptions.mnist_citation())
+
+elif data_box == 'Fashion MNIST' and algorithm_box == 'Simple GAN':
+
+    z_dim, fashion_mnist_shape, n_classes = 64, (1, 28, 28), 10
+
+    gen = generators.GeneratorSimpleGAN(z_dim).to(device)
+    gen.load_state_dict(torch.load('models/generators/gen_conditional_simple_gan_fashion_mnist.pth', 
+                        map_location = torch.device(device)))
+    gen.eval()
+
+    n_interpolation = st.slider(label = 'Dígite a quantidade de imagens geradas na interpolação:', 
+                                min_value = 6, max_value = 30, value = 9, step = 3)
+        
+    col1, col2 = st.columns(spec = [5, 5])
+
+    site_structure.simple_gan_images_generated(n_interpolation = n_interpolation, z_dim = z_dim, gen = gen, 
+                                               shape = fashion_mnist_shape, device = device, 
+                                               column1 = col1, column2 = col2)
+    
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre o sistema generativo:')
+    st.markdown(body = get_descriptions.simple_gan_description())
+    st.markdown(body = get_descriptions.simple_gan_citation())
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre a base de dados:')
+    st.markdown(body = get_descriptions.fashion_mnist_description())
+    st.markdown(body = get_descriptions.fashion_mnist_citation())
+
+elif data_box == 'EMNIST Letters' and algorithm_box == 'Simple GAN':
+
+    z_dim, emnist_lettters_shape, n_classes = 64, (1, 28, 28), 10
+
+    gen = generators.GeneratorSimpleGAN(z_dim).to(device)
+    gen.load_state_dict(torch.load('models/generators/gen_conditional_simple_gan_emnist_letters.pth', 
+                        map_location = torch.device(device)))
+    gen.eval()
+
+    n_interpolation = st.slider(label = 'Dígite a quantidade de imagens geradas na interpolação:', 
+                                min_value = 6, max_value = 30, value = 9, step = 3)
+        
+    col1, col2 = st.columns(spec = [5, 5])
+
+    site_structure.simple_gan_images_generated(n_interpolation = n_interpolation, z_dim = z_dim, gen = gen, 
+                                               shape = emnist_lettters_shape, device = device, 
+                                               column1 = col1, column2 = col2)
+    
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre o sistema generativo:')
+    st.markdown(body = get_descriptions.simple_gan_description())
+    st.markdown(body = get_descriptions.simple_gan_citation())
+    st.markdown(body = '***')
+    st.markdown(body = '#### Detalhes sobre a base de dados:')
+    st.markdown(body = get_descriptions.emnist_letters_description())
+    st.markdown(body = get_descriptions.emnist_letters_citation())
+
 else:
     st.warning(body = 'Desculpe, mas essa combinação de base de dados e sistema generativo está indisponível '
                       'no momento.')

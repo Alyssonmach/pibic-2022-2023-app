@@ -25,6 +25,30 @@ def dcgan_citation():
     
     return citation
 
+def simple_gan_description():
+    '''
+    Get Simple GAN architecture description.
+    '''
+
+    description = 'Uma **Rede Adversária Generativa Simples (Simple GAN)** é uma arquitetura de rede neural que consiste em '\
+                  'duas redes: um gerador e um discriminador. O gerador gera amostras de dados sintéticos que imitam os dados reais, '\
+                  'enquanto o discriminador avalia a autenticidade das amostras. Durante o treinamento, as duas redes são '\
+                  'treinadas simultaneamente em um processo competitivo, no qual o gerador tenta enganar o discriminador, '\
+                  'enquanto o discriminador tenta distinguir as amostras geradas do conjunto de dados reais. Com o tempo, o '\
+                  'gerador aprende a produzir amostras mais realistas, enquanto o discriminador se torna mais preciso em distinguir '\
+                  'entre amostras falsas e reais.'
+    
+    return description 
+
+def simple_gan_citation():
+    '''
+    Get Simple GAN architecture citation in APA format.
+    '''
+
+    citation = '* Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., ... & Bengio, Y. (2014). '\
+               'Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).'
+    return citation 
+
 def mnist_description():
     '''
     Get MNIST dataset description.
