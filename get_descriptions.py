@@ -1,3 +1,27 @@
+def simple_gan_description():
+    '''
+    Get Simple GAN architecture description.
+    '''
+
+    description = 'Uma **Rede Adversária Generativa Simples (Simple GAN)** é uma arquitetura de rede neural que consiste em '\
+                  'duas redes: um gerador e um discriminador. O gerador gera amostras de dados sintéticos que imitam os dados reais, '\
+                  'enquanto o discriminador avalia a autenticidade das amostras. Durante o treinamento, as duas redes são '\
+                  'treinadas simultaneamente em um processo competitivo, no qual o gerador tenta enganar o discriminador, '\
+                  'enquanto o discriminador tenta distinguir as amostras geradas do conjunto de dados reais. Com o tempo, o '\
+                  'gerador aprende a produzir amostras mais realistas, enquanto o discriminador se torna mais preciso em distinguir '\
+                  'entre amostras falsas e reais.'
+    
+    return description 
+
+def simple_gan_citation():
+    '''
+    Get Simple GAN architecture citation in APA format.
+    '''
+
+    citation = '* Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., ... & Bengio, Y. (2014). '\
+               'Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).'
+    return citation 
+
 def dcgan_description():
     '''
     Get DCGAN architecture description.
@@ -25,29 +49,67 @@ def dcgan_citation():
     
     return citation
 
-def simple_gan_description():
+def sngan_description():
     '''
-    Get Simple GAN architecture description.
-    '''
-
-    description = 'Uma **Rede Adversária Generativa Simples (Simple GAN)** é uma arquitetura de rede neural que consiste em '\
-                  'duas redes: um gerador e um discriminador. O gerador gera amostras de dados sintéticos que imitam os dados reais, '\
-                  'enquanto o discriminador avalia a autenticidade das amostras. Durante o treinamento, as duas redes são '\
-                  'treinadas simultaneamente em um processo competitivo, no qual o gerador tenta enganar o discriminador, '\
-                  'enquanto o discriminador tenta distinguir as amostras geradas do conjunto de dados reais. Com o tempo, o '\
-                  'gerador aprende a produzir amostras mais realistas, enquanto o discriminador se torna mais preciso em distinguir '\
-                  'entre amostras falsas e reais.'
-    
-    return description 
-
-def simple_gan_citation():
-    '''
-    Get Simple GAN architecture citation in APA format.
+    Get SNGAN architecture description.
     '''
 
-    citation = '* Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., ... & Bengio, Y. (2014). '\
-               'Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).'
-    return citation 
+    description = 'A arquitetura **SNGAN** é uma variação da arquitetura GAN que utiliza normalização espectral '\
+                  'na rede discriminadora e Path Length Regularization na rede geradora para gerar imagens '\
+                  'mais nítidas e realistas. A normalização espectral ajuda a estabilizar o treinamento da '\
+                  'rede e melhorar a qualidade das imagens, enquanto o mecanismo de auto-correção da rede '\
+                  'geradora garante a consistência das imagens geradas. A abordagem SNGAN tem sido amplamente '\
+                  'utilizada em aplicações de geração de imagens, como em jogos de vídeo e animação digital.'
+
+    return description
+
+def sngan_citation():
+    '''
+    Get SNGAN architecture citation in APA format.
+    '''
+
+    citation = '* Miyato, T., Kataoka, T., Koyama, M., & Yoshida, Y. (2018). Spectral Normalization for Generative '\
+               'Adversarial Networks. CoRR, abs/1802.05957. http://arxiv.org/abs/1802.05957.'
+
+    return citation
+
+def wgan_gp_description():
+    '''
+    Get WGAN-GP architecture description.
+    '''
+
+    description = 'A arquitetura **WGAN-GP (Wasserstein Generative Adversarial Network with Gradient Penalty)** é uma extensão '\
+                  'da arquitetura GAN que utiliza a distância de Wasserstein para medir a diferença entre as distribuições de '\
+                  'probabilidade da rede geradora e a rede discriminadora. Essa abordagem permite uma convergência mais estável '\
+                  'e confiável durante o treinamento da rede, resultando em imagens geradas de maior qualidade. Além disso, a '\
+                  'WGAN-GP também utiliza uma penalidade de gradiente para a rede discriminadora, o que ajuda a evitar problemas '\
+                  'de instabilidade no treinamento e melhora a qualidade das imagens geradas. A combinação dessas técnicas torna '\
+                  'a WGAN-GP uma arquitetura muito popular para geração de imagens de alta qualidade em aplicações como jogos de '\
+                  'vídeo e animação digital.'
+
+    return description
+
+def wgan_gp_citation():
+    '''
+    Get WGAN-GP architecture citation in APA format.
+    '''
+
+    citation = '* Gulrajani, I., Ahmed, F., Arjovsky, M., Dumoulin, V., & Courville, A. C. (2017). Improved Training of Wasserstein '\
+               'GANs. In Advances in Neural Information Processing Systems (pp. 5769-5779).'
+
+    return citation
+
+def wgan_gp_sngan_description():
+    '''
+    Get WGAN-GP + SNGAN architecture description.
+    '''
+
+    description = 'Uma união das ideias da arquitetura **SNGAN** e **WGAN-GP** pode resultar em uma nova arquitetura de GAN que incorpora '\
+                  'a normalização espectral e a regularização de caminho de comprimento da SNGAN com a distância de Wasserstein e a '\
+                  'penalidade de gradiente da WGAN-GP. Essa combinação pode melhorar ainda mais a qualidade das imagens geradas pela '\
+                  'rede, garantindo uma convergência mais estável.'
+
+    return description
 
 def mnist_description():
     '''

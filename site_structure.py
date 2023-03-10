@@ -125,8 +125,8 @@ def select_model_and_data():
 
     with col1:
 
-        algorithms = ['Simple GAN', 'DCGAN', 'SNGAN (Indisponível)', 'WGAN - GP (Indisponível)',
-                    'SNGAN + WGAN - GP (Indisponível)', 'Variational Autoencoder (Indisponível)']
+        algorithms = ['Simple GAN', 'DCGAN', 'SNGAN', 'WGAN - GP',
+                    'SNGAN + WGAN - GP', 'Variational Autoencoder (Indisponível)']
         algorithm_box = st.selectbox(label = '**Selecione o Sistema Generativo**:', 
                                     options = algorithms, index = 1, 
                                     help = 'Selecione o **Sistema Generativo** para gerar as imagens artificiais '
@@ -136,9 +136,18 @@ def select_model_and_data():
 
         datasets_simple_gan = ['MNIST', 'Fashion MNIST', 'EMNIST Letters']
         datasets = ['MNIST', 'Fashion MNIST', 'EMNIST Letters', 'CelebA']
+        datasets_wgan_gp_sngan = ['MNIST', 'Fashion MNIST', 'EMNIST Letters', 'CelebA (Indisponível)']
 
         if algorithm_box == 'Simple GAN':
             data_box = st.selectbox(label = '**Selecione o Conjunto de Imagens**:', options = datasets_simple_gan, index = 0, 
+                                    help = 'Selecione o **Conjunto de Imagens** para testar a capacidade de geração de imagens '
+                                        'do **Sistema Generativo** escolhido.')
+        elif algorithm_box == 'WGAN - GP':
+            data_box = st.selectbox(label = '**Selecione o Conjunto de Imagens**:', options = datasets_wgan_gp_sngan, index = 0, 
+                                    help = 'Selecione o **Conjunto de Imagens** para testar a capacidade de geração de imagens '
+                                        'do **Sistema Generativo** escolhido.')
+        elif algorithm_box == 'SNGAN + WGAN - GP':
+            data_box = st.selectbox(label = '**Selecione o Conjunto de Imagens**:', options = datasets_wgan_gp_sngan, index = 0, 
                                     help = 'Selecione o **Conjunto de Imagens** para testar a capacidade de geração de imagens '
                                         'do **Sistema Generativo** escolhido.')
         else:
