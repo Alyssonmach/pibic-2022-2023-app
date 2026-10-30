@@ -191,34 +191,34 @@ def area_with_interpolation_images(start_plot_number, end_plot_number, z_dim, n_
                                          second_number = end_plot_number, z_dim = z_dim, 
                                          n_classes = n_classes, device = device, gen = gen, 
                                          n_interpolation = n_interpolation, show_tensor = False)
-        utils.create_gif(images_pytorch_tensor = images, image_location = 'images/tensor_images1.gif')
+        utils.create_gif(images_pytorch_tensor = images, image_location = '.generated/tensor_images1.gif')
         
-        st.image(image = 'images/tensor_images1.gif', width = 150)
+        st.image(image = '.generated/tensor_images1.gif', width = 150)
 
         images = utils.interpolate_class(first_number = start_plot_number, 
                                          second_number = end_plot_number, z_dim = z_dim, 
                                          n_classes = n_classes, device = device, gen = gen, 
                                          n_interpolation = n_interpolation, show_tensor = False)
-        utils.create_gif(images_pytorch_tensor = images, image_location = 'images/tensor_images2.gif')
+        utils.create_gif(images_pytorch_tensor = images, image_location = '.generated/tensor_images2.gif')
         
-        st.image(image = 'images/tensor_images2.gif', width = 150)
+        st.image(image = '.generated/tensor_images2.gif', width = 150)
     
     with column2:
         images = utils.interpolate_class(first_number = start_plot_number, 
                                          second_number = end_plot_number, z_dim = z_dim, 
                                          n_classes = n_classes, device = device, gen = gen, 
                                          n_interpolation = n_interpolation, show_tensor = False)
-        utils.create_gif(images_pytorch_tensor = images, image_location = 'images/tensor_images3.gif')
+        utils.create_gif(images_pytorch_tensor = images, image_location = '.generated/tensor_images3.gif')
 
-        st.image(image = 'images/tensor_images3.gif', width = 150)
+        st.image(image = '.generated/tensor_images3.gif', width = 150)
 
         images = utils.interpolate_class(first_number = start_plot_number, 
                                          second_number = end_plot_number, z_dim = z_dim, 
                                          n_classes = n_classes, device = device, gen = gen, 
                                          n_interpolation = n_interpolation, show_tensor = False)
-        utils.create_gif(images_pytorch_tensor = images, image_location = 'images/tensor_images4.gif')
+        utils.create_gif(images_pytorch_tensor = images, image_location = '.generated/tensor_images4.gif')
         
-        st.image(image = 'images/tensor_images4.gif', width = 150)
+        st.image(image = '.generated/tensor_images4.gif', width = 150)
 
     st.markdown(body = '***')
 
@@ -243,12 +243,12 @@ def area_with_images_generated(n_noise, n_classes, n_interpolation, z_dim, gen, 
     with column1:
         utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
                                     interpolation_label = interpolation_label, gen = gen, device = device)
-        st.image(image = 'images/interpolate-noise.gif', width = 300) 
+        st.image(image = '.generated/interpolate-noise.gif', width = 300)
 
     with column2:
         utils.interpolate_noise_gif(n_noise = n_noise, z_dim = z_dim, n_interpolation = n_interpolation, 
                                     interpolation_label = interpolation_label, gen = gen, device = device)
-        st.image(image = 'images/interpolate-noise.gif', width = 300)
+        st.image(image = '.generated/interpolate-noise.gif', width = 300)
 
 def simple_gan_images_generated(n_interpolation, z_dim, gen, shape, device, column1, column2):
     '''
@@ -268,9 +268,9 @@ def simple_gan_images_generated(n_interpolation, z_dim, gen, shape, device, colu
     with column1:
         utils.simple_gan_grid_images(n_interpolation = n_interpolation, z_dim = z_dim, shape = shape, 
                                      gen = gen, device = device)
-        st.image(image = 'images/tensor_images.png', width = 500)
+        st.image(image = '.generated/tensor_images.png', width = 500)
 
     with column2:
         utils.simple_gan_grid_images(n_interpolation = n_interpolation, z_dim = z_dim, shape = shape, 
                                      gen = gen, device = device)
-        st.image(image = 'images/tensor_images.png', width = 500)
+        st.image(image = '.generated/tensor_images.png', width = 500)

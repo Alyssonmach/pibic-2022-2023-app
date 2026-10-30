@@ -5,8 +5,9 @@ from PIL import Image
 import numpy as np
 import torch
 import math
+import os
 
-def show_tensor_images(image_tensor, num_images = 25, nrow = 5, image_name = 'images/tensor_images.png'):
+def show_tensor_images(image_tensor, num_images = 25, nrow = 5, image_name = '.generated/tensor_images.png'):
     '''
     Function to display a grid of images from a given tensor of images.
 
@@ -20,6 +21,7 @@ def show_tensor_images(image_tensor, num_images = 25, nrow = 5, image_name = 'im
     image_tensor = (image_tensor + 1) / 2
     image_unflat = image_tensor.detach().cpu()
     image_grid = make_grid(image_unflat[:num_images], nrow = nrow)
+    os.makedirs(os.path.dirname(image_name) or '.', exist_ok = True)
     plt.imsave(image_name, image_grid.permute(1, 2, 0).squeeze().detach().numpy())
 
 def get_input_dimensions(z_dim, n_classes):
@@ -54,6 +56,7 @@ def create_gif(images_pytorch_tensor, image_location):
         convert_image = Image.fromarray(np.uint8(images_pytorch_tensor[index, 0, :, :].detach().numpy() * 255))
         images_numpy.append(convert_image)
     
+    os.makedirs(os.path.dirname(image_location) or '.', exist_ok = True)
     images_numpy[0].save(image_location, save_all = True, 
                          append_images = images_numpy, duration = 50, loop = 0)
 
@@ -152,7 +155,7 @@ def interpolate_noise(first_noise, second_noise, n_interpolation, interpolation_
     noise_and_labels = combine_vectors(interpolation_noise, interpolation_label.to(device))
     fake = gen(noise_and_labels)
     show_tensor_images(fake, num_images=n_interpolation, nrow=int(math.sqrt(n_interpolation)), 
-                       image_name = f'images/{n_noise}-generated.png')
+                       image_name = f'.generated/{n_noise}-generated.png')
 
 def interpolate_noise_gif(n_noise, z_dim, n_interpolation, interpolation_label, gen, device):
     '''
@@ -173,9 +176,9 @@ def interpolate_noise_gif(n_noise, z_dim, n_interpolation, interpolation_label, 
         for _, second_plot_noise in enumerate(plot_noises):
             interpolate_noise(first_plot_noise, second_plot_noise, n_interpolation, interpolation_label, 
                               n_noise, gen, device)
-            images_numpy.append(Image.open(f'images/{n_noise}-generated.png').convert("RGB"))
+            images_numpy.append(Image.open(f'.generated/{n_noise}-generated.png').convert("RGB"))
 
-    images_numpy[0].save('images/interpolate-noise.gif', save_all = True, 
+    images_numpy[0].save('.generated/interpolate-noise.gif', save_all = True,
                          append_images = images_numpy, duration = 100, loop = 0)
 
 def simple_gan_grid_images(n_interpolation, z_dim, shape, gen, device):
